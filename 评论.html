@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./css/评论.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+			integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+			crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<title>评论</title>
+	</head>
+	<body>
+		<div class="main">
+			<h3 class="box">
+				<a href="index.html" style="margin-top: 12px;margin-right: 70px;"><svg t="1749538943405" class="icon" viewBox="0 0 1024 1024" version="1.1"
+						xmlns="http://www.w3.org/2000/svg" p-id="12352" width="35" height="35">
+						<path
+							d="M514.029 1005.139c273.342 0 495.733-222.39 495.733-495.733s-222.392-495.736-495.733-495.736c-273.345 0-495.735 222.393-495.735 495.736 0 273.343 222.392 495.733 495.735 495.733zM514.029 75.637c239.185 0 433.767 194.585 433.767 433.768 0 239.185-194.58400001 433.767-433.767 433.767-239.185 0-433.769-194.584-433.769-433.76799999s194.584-433.768 433.76899999-433.76800001zM430.154 717.211c12.102 12.105 31.709 12.105 43.811 0 12.103-12.103 12.103-31.708 0-43.811l-133.011-133.012 420.941 0c17.125 0 30.983-13.857 30.98300001-30.982 0-17.096-13.858-30.985-30.98300001-30.985l-420.93900001 0 133.01100001-133.011c12.103-12.103 12.103-31.709 1e-8-43.812-6.05-6.051-13.98-9.078-21.90600001-9.078-7.92699999 0-15.853 3.026-21.906 9.078l-185.899 185.9c-12.10500001 12.101-12.105 31.709 0 43.812l185.899 185.9z"
+							p-id="12353" fill="#00a1d6"></path>
+					</svg></a>角色评论区
+			</h3>
+			<div class="notice-item box">
+				<a>最感兴趣的角色是哪位，留言分享你的感受吧！</a><span>&times;</span>
+			</div>
+			<ul class="comment-header box">
+				<li>按时间排序</li>
+			</ul>
+			<div class="comment-send box">
+				<div class="user-face">
+					<img id="avatar" src="./images/评论/0.jpg" alt="" />
+				</div>
+				<div class="textarea-comtainer">
+					<input type="text" placeholder="请输入昵称" id="name" />
+					<textarea name="" id="txt" placeholder="发一条友善的评论"></textarea>
+					<button class="comment-submit" id="btn">发表<br />评论</button>
+				</div>
+			</div>
+			<div class="reply-wrap box">
+				<div class="user-face"></div>
+				<div class="right">
+					<div class="reply-item">
+						<div class="user">
+							<div class="user-face">
+								<img src="./images/评论/user-1.jpg" alt="" />
+							</div>
+							<div class="user-name">先生夏</div>
+							<p>载人航天工程是一个国家综合国力的体现，厉害了，我的国！</p>
+						</div>
+						<div class="info">
+							<span>2021-10-16 11:58</span>
+							<span>28460</span>
+							<span></span>
+							<span><a class="remove" href="#">删除</a></span>
+						</div>
+					</div>
+					<div class="reply-item">
+						<div class="user">
+							<div class="user-face">
+								<img src="./images/评论/user-2.jpg" alt="" />
+							</div>
+							<div class="user-name">梓川枫的熊猫</div>
+							<p>看完整个神舟十三号发射的直播节目，太激动人心了！</p>
+						</div>
+						<div class="info">
+							<span>2021-10-16 11:58</span>
+							<span>324</span>
+							<span></span>
+							<span><a class="remove" href="#">删除</a></span>
+						</div>
+					</div>
+					<div class="reply-item">
+						<div class="user">
+							<div class="user-face">
+								<img src="./images/评论/user-3.jpg" alt="" />
+							</div>
+							<div class="user-name">猫一撮先生</div>
+							<p>致敬航天人，前进的步伐从未停止 祝三位航天员一切顺利！</p>
+						</div>
+						<div class="info">
+							<span>2021-10-16 12:09</span>
+							<span>493</span>
+							<span></span>
+							<span><a class="remove" href="#">删除</a></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="new"></div>
+		</div>
+	</body>
+	<script src="./js/评论.js" type="text/javascript" charset="utf-8"></script>
+</html>

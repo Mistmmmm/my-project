@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>用户注册</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: lightcyan;
+        }
+
+        .main {
+            width: 525px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .hr_1 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #3275c3;
+            height: 35px;
+            border-bottom: 2px solid #3275c3;
+            padding-left: 12px;
+            margin-bottom: 20px;
+        }
+
+        .left {
+            text-align: right;
+            width: 100px;
+            height: 35px;
+            padding-right: 10px;
+            vertical-align: middle;
+        }
+
+        .center {
+            width: 200px;
+        }
+
+        .inputClass {
+            width: 180px;
+            height: 30px;
+            border: 1px solid #79abea;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        .inputClass:focus {
+            outline: none;
+            border-color: #3275c3;
+            box-shadow: 0 0 5px rgba(50, 117, 195, 0.3);
+        }
+
+        .prompt {
+            color: #f00;
+            font-size: 12px;
+            padding-left: 10px;
+            min-height: 20px;
+        }
+
+        .success {
+            color: #28a745;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+
+        .btn-register {
+            background-color: #3275c3;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-register:hover {
+            background-color: #2a65ad;
+        }
+
+        .btn-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 100%; max-width: 800px;">
+        <table class="main" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="hr_1">新用户注册</td>
+            </tr>
+            <form id="registerForm" action="" method="post">
+                <tr>
+                    <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="left">用户名：</td>
+                                <td class="center"><input id="user" type="text" class="inputClass" 
+                                    placeholder="4-16位字母" onblur="checkUser()" /></td>
+                                <td><div id="user_prompt" class="prompt">用户名由4-16位字母组成</div></td>
+                            </tr>
+                            <tr>
+                                <td class="left">密码：</td>
+                                <td class="center"><input id="pwd" type="password" class="inputClass" 
+                                    placeholder="4-10位字符" onblur="checkPwd()" /></td>
+                                <td><div id="pwd_prompt" class="prompt">密码由4-10位字符组成</div></td>
+                            </tr>
+                            <tr>
+                                <td class="left">确认密码：</td>
+                                <td class="center"><input id="repwd" type="password" class="inputClass" 
+                                    placeholder="再次输入密码" onblur="checkRepwd()" /></td>
+                                <td><div id="repwd_prompt" class="prompt"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="left">电子邮箱：</td>
+                                <td class="center"><input id="email" type="email" class="inputClass" 
+                                    placeholder="example@domain.com" onblur="checkEmail()" /></td>
+                                <td><div id="email_prompt" class="prompt">请输入有效的邮箱地址</div></td>
+                            </tr>
+                            <tr>
+                                <td class="left">手机号码：</td>
+                                <td class="center"><input id="mobile" type="tel" class="inputClass" 
+                                    placeholder="11位手机号" onblur="checkMobile()" maxlength="11" /></td>
+                                <td><div id="mobile_prompt" class="prompt"></div></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="btn-container">
+                        <button type="button" class="btn-register" onclick="submitForm()">确认注册</button>
+                        <div style="margin-top: 15px;">
+                            已有账号？<a href="./登陆.html" style="color: #3275c3;">立即登录</a >
+                        </div>
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
+
+    <script>
+        function $(elementId) {
+            return document.getElementById(elementId);
+        }
+
+        function showPrompt(element, message, isSuccess) {
+            element.innerHTML = message;
+            element.className = isSuccess ? "prompt success" : "prompt error";
+            return isSuccess;
+        }
+
+        function checkUser() {
+            const user = $("user").value.trim();
+            const prompt = $("user_prompt");
+            
+            if (user.length < 4 || user.length > 16) {
+                return showPrompt(prompt, "用户名长度应为4-16位", false);
+            }
+            
+            if (/\d/.test(user)) {
+                return showPrompt(prompt, "用户名不能包含数字", false);
+            }
+            
+            return showPrompt(prompt, "用户名可用", true);
+        }
+
+        function checkPwd() {
+            const pwd = $("pwd").value;
+            const prompt = $("pwd_prompt");
+            
+            if (pwd.length < 4 || pwd.length > 10) {
+                return showPrompt(prompt, "密码长度应为4-10位", false);
+            }
+            
+            return showPrompt(prompt, "密码符合要求", true);
+        }
+
+        function checkRepwd() {
+            const repwd = $("repwd").value;
+            const pwd = $("pwd").value;
+            const prompt = $("repwd_prompt");
+            
+            if (pwd !== repwd) {
+                return showPrompt(prompt, "两次输入的密码不一致", false);
+            }
+            
+            return showPrompt(prompt, "密码匹配", true);
+        }
+
+        function checkEmail() {
+            const email = $("email").value.trim();
+            const prompt = $("email_prompt");
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(email)) {
+                return showPrompt(prompt, "请输入有效的邮箱地址", false);
+            }
+            
+            return showPrompt(prompt, "邮箱格式正确", true);
+        }
+
+        function checkMobile() {
+            const mobile = $("mobile").value.trim();
+            const prompt = $("mobile_prompt");
+            const mobileRegex = /^1[3-9]\d{9}$/;
+            
+            if (!mobileRegex.test(mobile)) {
+                return showPrompt(prompt, "请输入有效的手机号码", false);
+            }
+            
+            return showPrompt(prompt, "手机号码有效", true);
+        }
+
+        function validateForm() {
+            return checkUser() && checkPwd() && checkRepwd() && checkEmail() && checkMobile();
+        }
+
+        function submitForm() {
+            if (validateForm()) {
+                alert("注册成功！即将跳转到登录页面");
+				//请求加载跳转新界面
+                window.location.href = "./登陆.html";
+            } else {
+                alert("请检查输入信息中的错误");
+            }
+        }
+    </script>
+</body>
+</html>

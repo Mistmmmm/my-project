@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="./css/登陆注册.css" />
+		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	</head>
+
+
+	<body>
+		<div class="container">
+			<h1>登录</h1>
+			<div class="ipt-box">
+				<input type="text" id="username" placeholder="账号" autocomplete="off">
+				 <div id="username-error" class="error-message"></div>
+			</div>
+			<div class="ipt-box">
+				<input type="password" id="password" placeholder="密码" autocomplete="off">
+				<div id="password-error" class="error-message"></div>
+				<i class="eye fa fa-eye-slash"></i>
+				<div class="beam"></div>
+			</div>
+			<button type="button" class="btn-login" onclick="login()">登录</button>
+			<div class="register-link">
+				没有账号？<a href="./注册.html">立即注册</a>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 要操作的元素
+		const body = document.body;
+		const eye = document.querySelector('.eye');
+		const beam = document.querySelector('.beam');
+		const passwordInput = document.getElementById('password');
+		const usernameInput = document.getElementById('username');
+		const usernameError = document.getElementById('username-error');
+		const passwordError = document.getElementById('password-error');
+
+		// 为body绑定鼠标移动事件
+		body.addEventListener('mousemove', function(e) {
+			//返回元素相对于视口的位置信息(API)
+			let rect = beam.getBoundingClientRect();
+			//反正切函数
+			let mouseX = rect.right + (rect.width / 2);
+			let mouseY = rect.top + (rect.height / 2);
+			let rad = Math.atan2(mouseX - e.pageX, mouseY - e.pageY);
+			//计算并弧度转角度，调整角度偏移
+			let deg = (rad * (20 / Math.PI) * -1) - 350;
+			// 设置CSS自定义属性--beam-deg（灯光射线角度）
+			body.style.setProperty('--beam-deg', deg + 'deg');
+		})
+
+		// 为密码框小眼睛绑定点击事件
+		eye.addEventListener('click', function(e) {
+			e.preventDefault();
+			body.classList.toggle('show-password');
+			// 切换密码输入框的type属性：password：text 或 text：password
+			passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+			//更换眼睛图标，修改图标class名
+			eye.className = 'eye fa ' + (passwordInput.type === 'password' ? 'fa-eye-slash' : 'fa-eye');
+		    // 保持密码输入框的焦点状态，使用户可以继续输入
+			passwordInput.focus();
+		})
+		// 表单验证
+		function validateForm() {
+			// 验证状态设为true
+			let isValid = true;
+
+			// 验证用户名
+			// 为空显示错误提醒，否则不显示错误提醒// 验证状态设为false
+			if (usernameInput.value.trim() === '') {
+				usernameError.textContent = '请输入用户名';
+				usernameError.style.display = 'block';
+				isValid = false;
+			} else {
+				usernameError.style.display = 'none';
+			}
+
+			// 验证密码，同上
+			if (passwordInput.value.trim() === '') {
+				passwordError.textContent = '请输入密码';
+				passwordError.style.display = 'block';
+				isValid = false;
+				//长度小于四时
+			} else if (passwordInput.value.length < 4 || passwordInput.value.length > 10) {
+				passwordError.textContent = '密码长度应为4-10位';
+				passwordError.style.display = 'block';
+				isValid = false;
+			} else {
+				passwordError.style.display = 'none';
+			}
+            //返回最终验证状态
+			return isValid;
+		}
+		// 登录功能
+		function login() {
+			if (validateForm()) {
+				alert('登录成功！');
+				window.location.href = "index.html";
+			}
+		}
+		// 回车键提交，监听回车键状态
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Enter') {
+				login();
+			}
+		});
+	</script>
+</html>
